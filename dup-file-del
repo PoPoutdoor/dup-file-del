@@ -88,7 +88,7 @@ if [[ ! -e "$ref_dir" || ! -e "$clean_dir" ]]; then
 	echo 'Reference/target directory not exist, abort!'
 	exit 1
 fi
-if [[ "$(find "$ref_dir" "$clean_dir" -empty -type d | wc -l)" -le 2 ]]; then
+if [[ `find "$ref_dir" "$clean_dir" -empty -type d | wc -l` -gt 0 ]]; then
 	echo 'Reference/target directory empty, abort!'
 	exit 1
 fi
