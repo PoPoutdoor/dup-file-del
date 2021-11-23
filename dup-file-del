@@ -98,6 +98,12 @@ echo "Target: $clean_dir"
 
 # match file size first, empty/link file skipped
 files=`find "$ref_dir" "$clean_dir" -not -empty -type f -print0 | xargs -0 stat --printf="%s %n\n"  | sort -n -k1,2` 
+if [[ -z "$files" ]]; then
+	echo -e "\nYou may like to remove following empty file(s):\n"
+	find "$clean_dir" -empty -type f -print0 | xargs -0 stat --printf='%n\n'
+	echo -e "\n"
+	exit
+fi
 
 # group processing by filesize
 del_files=''
